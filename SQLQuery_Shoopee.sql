@@ -84,6 +84,9 @@ CREATE TABLE Sent_Message
 (
   customerID1 int,
   customerID2 int,
+  messages varchar(max),
+  isRead bit,
+  dateMessage datetime DEFAULT GETDATE(),
   PRIMARY KEY (customerID1, customerID2),
   FOREIGN KEY (customerID1) REFERENCES Customer(customerID),
   FOREIGN KEY (customerID2) REFERENCES Customer(customerID)
