@@ -1,0 +1,124 @@
+USE LECTURE2_SHOPEE
+GO
+
+INSERT INTO Customer VALUES('Le Van A', '090111111','A@abc.com',CONVERT(date,'01/01/2000',103));
+INSERT INTO Customer VALUES('Le Van B', '090111112','B@abc.com',CONVERT(date,'02/01/2001',103));
+INSERT INTO Customer VALUES('Le Van C', '090111113','C@abc.com',CONVERT(date,'03/01/2002',103));
+INSERT INTO Customer VALUES('Le Van D', '090111114','D@abc.com',CONVERT(date,'04/01/2003',103));
+INSERT INTO Customer VALUES('Le Van E', '090111115','E@abc.com',CONVERT(date,'05/01/2004',103));
+INSERT INTO Customer VALUES('Le Van F', '090111116','F@abc.com',CONVERT(date,'06/01/2004',103));
+INSERT INTO Customer VALUES('Le Van G', '090111117','G@abc.com',CONVERT(date,'07/01/2006',103));
+INSERT INTO Customer VALUES('Le Van H', '090111118','H@abc.com',CONVERT(date,'08/01/2020',103));
+INSERT INTO Customer VALUES('Le Van I', '090111119','I@abc.com',CONVERT(date,'09/01/2001',103));
+INSERT INTO Customer VALUES('Le Van K', '090111110','K@abc.com',CONVERT(date,'10/01/2010',103));
+
+INSERT INTO Category VALUES('Category1', 'CateGory 1 day ne');
+INSERT INTO Category VALUES('Category2', 'CateGory 2 day ne');
+INSERT INTO Category VALUES('Category3', 'CateGory 3 day ne');
+INSERT INTO Category VALUES('Category4', 'CateGory 4 day ne');
+INSERT INTO Category VALUES('Category5', 'CateGory 5 day ne');
+INSERT INTO Category VALUES('Category6', 'CateGory 6 day ne');
+INSERT INTO Category VALUES('Category7', 'CateGory 7 day ne');
+INSERT INTO Category VALUES('Category8', 'CateGory 8 day ne');
+INSERT INTO Category VALUES('Category9', 'CateGory 9 day ne');
+INSERT INTO Category VALUES('Category10', 'CateGory 10 day ne');
+
+INSERT INTO Product VALUES('Product1', 100000,100,1000);
+INSERT INTO Product VALUES('Product2', 200000,1001,1000);
+INSERT INTO Product VALUES('Product3', 300000,1002,1000);
+INSERT INTO Product VALUES('Product4', 400000,1003,1000);
+INSERT INTO Product VALUES('Product5', 500000,0,1000);
+INSERT INTO Product VALUES('Product6', 600000,1,1000);
+INSERT INTO Product VALUES('Product7', 700000,100,1000);
+INSERT INTO Product VALUES('Product8', 800000,100,1000);
+INSERT INTO Product VALUES('Product9', 900000,100,1000);
+INSERT INTO Product VALUES('Product10',7700000,100,1000);
+
+UPDATE Product SET DiscountPercent = 50
+
+
+INSERT INTO CustomerAddress VALUES(1,'A',1,'Ho Chi Minh','Ho Chi Minh','ABC','abc ADRESS');
+INSERT INTO CustomerAddress VALUES(2,'B',1,'VUNG TAU','VUNG TAU','ABC1','abc1 ADRESS');
+INSERT INTO CustomerAddress VALUES(3,'C',1,'BINH DUONG','THU DAU 1','ABC2','abc2 ADRESS');
+INSERT INTO CustomerAddress VALUES(4,'D',1,'DONG NAI','LONG THANH','ABC3','abc3 ADRESS');
+INSERT INTO CustomerAddress VALUES(5,'E',1,'DAKLAK','KRONGPAK','ABC4','abc4 ADRESS');
+INSERT INTO CustomerAddress VALUES(6,'F',1,'TAY NINH','GO DAU','ABC5','abc5 ADRESS');
+INSERT INTO CustomerAddress VALUES(7,'G',1,'Ho ChI MINH','QUAN 1','ABC6','abc6 ADRESS');
+INSERT INTO CustomerAddress VALUES(8,'H',1,'HA NOI','CAU GIAY','ABC7','abc7 ADRESS');
+INSERT INTO CustomerAddress VALUES(9,'I',1,'LAO CAI','KO MAC QUAN','ABC8','abc8 ADRESS');
+INSERT INTO CustomerAddress VALUES(10,'K',1,'CA MAU','LUNG CU','ABC','abc9 ADRESS9');
+
+
+INSERT INTO CustomerOrder VALUES(1,CONVERT(date,'10/01/2022',103),CONVERT(date,'01/01/2022',103),100000,N'nhanh',1);
+INSERT INTO CustomerOrder VALUES(2,CONVERT(date,'9/01/2022',103),CONVERT(date,'02/01/2022',103),1000000,N'nhanh sơ sơ',2);
+INSERT INTO CustomerOrder VALUES(3,CONVERT(date,'8/01/2022',103),CONVERT(date,'03/01/2022',103),200000,N'nhanhvl',3);
+INSERT INTO CustomerOrder VALUES(4,CONVERT(date,'7/01/2022',103),CONVERT(date,'04/01/2022',103),500000,N'nhanhvcc',4);
+INSERT INTO CustomerOrder VALUES(5,CONVERT(date,'6/01/2022',103),CONVERT(date,'05/01/2022',103),1000000,N'nhanhvd',5);
+INSERT INTO CustomerOrder VALUES(6,CONVERT(date,'5/01/2022',103),CONVERT(date,'01/01/2022',103),10000000,N'cham',6);
+INSERT INTO CustomerOrder VALUES(7,CONVERT(date,'4/01/2022',103),CONVERT(date,'02/01/2022',103),1000000000,N'chamvl',7);
+INSERT INTO CustomerOrder VALUES(8,CONVERT(date,'10/02/2050',103),CONVERT(date,'03/01/2022',103),00000,N'chamvcc',8);
+INSERT INTO CustomerOrder VALUES(9,CONVERT(date,'2/01/2022',103),CONVERT(date,'04/01/2022',103),400000,N'tên lửa',9);
+INSERT INTO CustomerOrder VALUES(10,CONVERT(date,'25/12/2023',103),CONVERT(date,'05/01/2022',103),500,N'máy bay',10);
+
+
+INSERT INTO ProductCategory VALUES(1,1);
+INSERT INTO ProductCategory VALUES(1,3);
+INSERT INTO ProductCategory VALUES(2,1);
+INSERT INTO ProductCategory VALUES(2,2);
+INSERT INTO ProductCategory VALUES(4,1);
+INSERT INTO ProductCategory VALUES(5,1);
+INSERT INTO ProductCategory VALUES(6,1);
+INSERT INTO ProductCategory VALUES(3,2);
+INSERT INTO ProductCategory VALUES(4,3);
+INSERT INTO ProductCategory VALUES(5,6);
+
+INSERT INTO OrderDetail VALUES(5,6,1000000,5000000);
+INSERT INTO OrderDetail VALUES(1,1,100000,50000000);
+INSERT INTO OrderDetail VALUES(2,3,1000050,50000000);
+INSERT INTO OrderDetail VALUES(5,1,10040,9000000);
+INSERT INTO OrderDetail VALUES(2,4,13000,9000000);
+INSERT INTO OrderDetail VALUES(3,2,1300000,50000);
+INSERT INTO OrderDetail VALUES(6,6,13000,500);
+INSERT INTO OrderDetail VALUES(10,9,130000,5000);
+INSERT INTO OrderDetail VALUES(8,7,106000,50000);
+INSERT INTO OrderDetail VALUES(6,5,10000,700000);
+
+-------nhung khach hang tren 20 tuoi--------
+SELECT FullName, PhoneNumber,  YEAR(GETDATE())-YEAR(DateOfBirth) AS 'tren 20 tuoi' from Customer 
+WHERE YEAR(GETDATE())-YEAR(DateOfBirth) >20
+
+--------top 3 khach hang lon yuoi nhat--------
+SELECT TOP 3 WITH TIES *
+FROM Customer
+ORDER by YEAR(GETDATE())-YEAR(DateOfBirth) DESC
+
+--------Tat ca cac category-------------
+SELECT * FROM Category
+
+--------Thong tin Don hang co tong lon hon 3500--------
+SELECT* FROM CustomerOrder
+WHERE TotalAmount >3500
+
+-------Thong tin oder cua 3 down hang giao gan nhat--------
+SELECT TOP 3 WITH TIES *
+FROM CustomerOrder
+ORDER BY DAY(DateDelivery)-DAY(GETDATE())
+
+------san pham co so luong ton kho tren 500------------
+SELECT * FROM Product
+WHERE InventoryQuatity >500
+
+-------thong tin san pham co giam gai tren 50%---------
+SELECT * FROM Product
+WHERE DiscountPercent >50
+
+---------San pham da het hang trong kho-----------
+SELECT * FROM Product
+WHERE InventoryQuatity =0
+
+
+-------3 san pham co gia lon nhat
+SELECT TOP 3 WITH TIES * 
+FROM Product
+ORDER by Price DESC
+
