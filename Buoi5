@@ -1,0 +1,243 @@
+
+USE MASTER
+;
+
+DROP DATABASE IF EXISTS LECTURE5_JOIN
+;
+CREATE DATABASE LECTURE5_JOIN
+;
+
+USE LECTURE5_JOIN
+;
+CREATE TABLE Customer
+(
+CustomerID int PRIMARY KEY IDENTITY
+(
+1
+,
+1),
+
+FullName nvarchar
+(20
+) NOT NULL
+
+);
+CREATE TABLE DeliveryAddress
+(
+
+ID int PRIMARY KEY IDENTITY
+(
+1
+,
+1),
+
+FullAddress nvarchar
+(20
+) NOT NULL
+
+);
+CREATE TABLE CustomerOrder
+(
+
+OrderID int PRIMARY KEY IDENTITY
+(
+1
+,
+1),
+
+CustomerID int
+,
+FoodName nvarchar
+(20
+) NOT NULL,
+
+DeliveryAddressID int
+
+);
+INSERT INTO Customer
+(FullName)
+
+VALUES
+(N'Châu Tinh Trì'),
+(N'Châu Nhuận Phát'), (N'Lý Tiểu Long'), (N'Thành Long');
+
+INSERT INTO DeliveryAddress
+(FullAddress)
+VALUES
+(N'BMT')
+
+INSERT INTO DeliveryAddress(FullAddress) VALUES(N'TP. HCM'),(N'TP. HA NOI');
+INSERT INTO CustomerOrder
+
+(CustomerID
+
+, FoodName
+
+, DeliveryAddressID
+)
+
+VALUES
+(
+1
+, N'Heo Quay'
+,
+1),
+
+(
+1
+, N'Gà Luộc'
+,
+1),
+
+(
+3
+, N'Bò Lá Lốt'
+,
+2),
+
+(100
+, N'Dê Nướng'
+,
+2
+)
+
+INSERT INTO CustomerOrder VALUES (102,N'chuot Nuong',3)
+
+
+SELECT co.CustomerID, co.FoodName, da.FullAddress FROM CustomerOrder co INNER JOIN DeliveryAddress da ON co.DeliveryAddressID = da.ID
+
+SELECT c.FullName, co.CustomerID, co.FoodName, da.FullAddress FROM CustomerOrder co INNER JOIN DeliveryAddress da ON co.DeliveryAddressID = da.ID
+                                                                                    INNER JOIN Customer c ON c.CustomerID = co.CustomerID
+
+SELECT co.CustomerID, co.FoodName, co.DeliveryAddressID, c.FullName FROM CustomerOrder co LEFT JOIN Customer c ON co.CustomerID = c.CustomerID
+
+SELECT co.CustomerID, co.FoodName, co.DeliveryAddressID, c.FullName, da.FullAddress FROM CustomerOrder co LEFT JOIN Customer c ON co.CustomerID = c.CustomerID
+                                                                                                          LEFT JOIN DeliveryAddress da ON da.ID = co.DeliveryAddressID
+
+SELECT c.CustomerID, c.FullName, co.FoodName   FROM Customer c RIGHT JOIN CustomerOrder co ON c.CustomerID = co.CustomerID
+
+SELECT co.OrderID, co.CustomerID, co.FoodName, da.FullAddress  FROM CustomerOrder co FULL JOIN DeliveryAddress  da ON co.DeliveryAddressID = da.ID
+
+SELECT c.CustomerID, c.FullName, o.FoodName, d.FullAddress
+FROM Customer c
+FULL JOIN CustomerOrder o ON c.CustomerID = o.CustomerID
+FULL JOIN DeliveryAddress d ON d.ID = o.DeliveryAddressID
+
+
+SELECT co.CustomerID, co.FoodName, c.FullName
+FROM CustomerOrder co
+LEFT JOIN Customer c ON co.CustomerID = c.CustomerID
+WHERE c.CustomerID IS NULL
+
+
+SELECT * FROM Customer;
+SELECT *FROM CustomerOrder;
+SELECT *FROM DeliveryAddress;
+
+--SELECT c.CustomerID, c.FullName, co.FoodName, co.OrderID, co.DeliveryAddressID, da.FullAddress  FROM Customer c INNER JOIN CustomerOrder co ON c.CustomerID = co.CustomerID
+--INNER JOIN DeliveryAddress da ON da.ID = co.DeliveryAddressID
+
+-- SELECT da.ID FROM CustomerOrder co INNER JOIN DeliveryAddress da ON co.DeliveryAddressID = da.ID
+-- GROUP BY da.ID, co.CustomerID
+-- HAVING sum(da.ID)<3
+
+-- SELECT *from Customer WHERE CustomerID=102
+--SELECT * FROM CustomerOrder co LEFT JOIN Customer c ON c.CustomerID = co.CustomerID
+--WHERE co.CustomerID IS NULL
+SELECT * FROM Customer c LEFT JOIN CustomerOrder co ON c.CustomerID = co.CustomerID
+SELECT * FROM Customer c LEFT JOIN CustomerOrder co ON c.CustomerID = co.CustomerID
+RIGHT JOIN DeliveryAddress da ON da.ID = co.DeliveryAddressID;
+
+---SELECT * FROM Customer c LEFT JOIN CustomerOrder co ON c.CustomerID = co.CustomerID
+---WHERE co.CustomerID IS NULL
+
+
+--SELECT * FROM CustomerOrder co LEFT JOIN Customer c  ON c.CustomerID = co.CustomerID
+
+--SELECT * FROM Customer c LEFT JOIN CustomerOrder co ON c.CustomerID = co.CustomerID
+--LEFT JOIN DeliveryAddress da ON da.ID = co.DeliveryAddressID
+
+SELECT * FROM DeliveryAddress da LEFT JOIN CustomerOrder co ON da.ID= co.DeliveryAddressID
+LEFT JOIN Customer c ON c.CustomerID = co.CustomerID
+
+SELECT * FROM Customer;
+SELECT *FROM CustomerOrder;
+SELECT *FROM DeliveryAddress;
+
+SELECT *  FROM Customer c FULL JOIN CustomerOrder co ON c.CustomerID = co.CustomerID
+SELECT *  FROM CustomerOrder co FULL JOIN Customer c ON c.CustomerID = co.CustomerID
+
+
+SELECT * FROM CustomerOrder co FULL JOIN DeliveryAddress da ON co.DeliveryAddressID = da.ID
+
+
+
+
+
+USE MASTER;
+DROP DATABASE IF EXISTS LECTURE5_SELFT_JOIN;
+CREATE DATABASE LECTURE5_SELFT_JOIN;
+USE LECTURE5_SELFT_JOIN;
+CREATE TABLE Employee(
+
+ID int PRIMARY KEY IDENTITY(1, 1),
+FullName nvarchar(20) NOT NULL,
+ManagerID int,
+
+);
+INSERT INTO Employee (FullName, ManagerID)
+VALUES(N'HÀO CEO', NULL),(N'HƯỜNG DRECTOR', 1),(N'MẪN CTO', 1),(N'HUY CULI', 3)
+
+SELECT * FROM Employee
+
+SELECT emp.ID, emp.FullName, manager.FullName
+FROM Employee emp
+INNER JOIN Employee manager ON emp.ManagerID = manager.ID
+
+SELECT emp.ID, emp.FullName, manager.FullName AS Manager
+FROM Employee emp, Employee manager
+WHERE emp.ManagerID = manager.ID
+
+
+ use LECTURE5_JOIN
+SELECT
+    fk.name 'FK Name',
+    tp.name 'Parent table',
+    cp.name, cp.column_id,
+    tr.name 'Refrenced table',
+    cr.name, cr.column_id
+FROM 
+    sys.foreign_keys fk
+INNER JOIN 
+    sys.tables tp ON fk.parent_object_id = tp.object_id
+INNER JOIN 
+    sys.tables tr ON fk.referenced_object_id = tr.object_id
+INNER JOIN 
+    sys.foreign_key_columns fkc ON fkc.constraint_object_id = fk.object_id
+INNER JOIN 
+    sys.columns cp ON fkc.parent_column_id = cp.column_id AND fkc.parent_object_id = cp.object_id
+INNER JOIN 
+    sys.columns cr ON fkc.referenced_column_id = cr.column_id AND fkc.referenced_object_id = cr.object_id
+ORDER BY
+    tp.name, cp.column_id
+
+
+USE MASTER;
+DROP DATABASE IF EXISTS LECTURE5_UNION; CREATE DATABASE LECTURE5_UNION;
+USE LECTURE5_UNION;
+CREATE TABLE A(
+FromColumnTableA nvarchar(20) NOT NULL,
+);
+CREATE TABLE B(
+FromColumnTableB nvarchar(20) NOT NULL,
+);
+INSERT INTO A(FromColumnTableA) VALUES (1),(2),(3),(5) INSERT INTO B(FromColumnTableB) VALUES (3),(4),(5) 
+SELECT * FROM A
+SELECT * FROM B
+
+SELECT FromColumnTableA FROM A UNION
+SELECT FromColumnTableB FROM B;
+
+SELECT FromColumnTableA FROM A UNION ALL
+SELECT FromColumnTableB FROM B;
+

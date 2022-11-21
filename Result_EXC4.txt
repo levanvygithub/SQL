@@ -89,7 +89,7 @@ SELECT * FROM CustomerOrder WHERE
   WHERE OrderStatus = 'COMPLETED'
   GROUP BY DeliveryCity
 
---8-------Tôgn đơn hàng bị huỷ theo thành phố---------------------
+--8-------Tổng đơn hàng bị huỷ theo thành phố---------------------
   SELECT COUNT(*) AS 'CANCLED Order Sum', DeliveryCity FROM CustomerOrder
   WHERE OrderStatus = 'CANCLED'
   GROUP BY DeliveryCity
